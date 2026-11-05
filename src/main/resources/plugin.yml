@@ -1,0 +1,14 @@
+name: CH-ChunkLoader
+main: com.ch.chunkloader.CHChunkLoader
+version: 1.0
+api-version: '1.21'
+description: 신호기 아머스탠드 청크로더 (설치 위치 기준 3x3 청크 상시 로드)
+commands:
+  손에든아이템청크로더설정:
+    description: 손에 든 아이템을 청크로더 아이템으로 설정
+    aliases: [chunkloaderitem]
+    usage: /손에든아이템청크로더설정
+permissions:
+  chunkloader.admin:
+    description: 청크로더 아이템 설정 / 다른 유저의 청크로더 철거
+    default: op
