@@ -29,7 +29,7 @@ max-radius: 8      # radius 상한 (서버 부하 방지)
 loaders:
   default:         # 종류 이름 = 키 이름
     radius: 1      # 1 = 3x3
-    item: null     # /손에든아이템청크로더설정 default 로 자동 저장
+    item: null     # /chunkloaderitem default 로 자동 저장
   wide:
     radius: 2      # 2 = 5x5
     item: null
