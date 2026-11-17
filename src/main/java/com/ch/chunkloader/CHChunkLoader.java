@@ -114,9 +114,9 @@ public class CHChunkLoader extends JavaPlugin implements CommandExecutor, TabCom
         applyAll();
 
         Bukkit.getPluginManager().registerEvents(new LoaderListener(this), this);
-        if (getCommand("손에든아이템청크로더설정") != null) {
-            getCommand("손에든아이템청크로더설정").setExecutor(this);
-            getCommand("손에든아이템청크로더설정").setTabCompleter(this);
+        if (getCommand("chunkloaderitem") != null) {
+            getCommand("chunkloaderitem").setExecutor(this);
+            getCommand("chunkloaderitem").setTabCompleter(this);
         }
         getLogger().info(lang.get("log-enabled", "count", String.valueOf(loaders.size()), "lang", lang.code()));
     }
