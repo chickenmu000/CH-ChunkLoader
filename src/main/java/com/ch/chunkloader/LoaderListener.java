@@ -64,9 +64,9 @@ public class LoaderListener implements Listener {
     public void onPlace(PlayerInteractEvent e) {
         if (e.getHand() != EquipmentSlot.HAND) return;
         if (e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        ItemStack loaderItem = plugin.loaderItem();
         ItemStack hand = e.getItem();
-        if (loaderItem == null || hand == null || !hand.isSimilar(loaderItem)) return;
+        String type = plugin.typeOfItem(hand);
+        if (type == null) return;
         Block clicked = e.getClickedBlock();
         if (clicked == null) return;
         Player p = e.getPlayer();
@@ -75,7 +75,7 @@ public class LoaderListener implements Listener {
         e.setCancelled(true);
         Block target = clicked.getRelative(e.getBlockFace());
         if (!target.getType().isAir() && !target.isPassable()) {
-            p.sendMessage(CHChunkLoader.PREFIX + "§c여기에는 설치할 수 없습니다.");
+            p.sendMessage(plugin.lang().msg("cannot-place"));
             return;
         }
         Location loc = target.getLocation().add(0.5, 0, 0.5);
@@ -98,10 +98,11 @@ public class LoaderListener implements Listener {
         if (p.getGameMode() != GameMode.CREATIVE) {
             hand.setAmount(hand.getAmount() - 1);
         }
+        int radius = plugin.radiusOf(type, 1);
         plugin.addLoader(new Loader(stand.getUniqueId(), target.getWorld().getName(),
-                target.getX(), target.getY(), target.getZ(), p.getUniqueId()));
+                target.getX(), target.getY(), target.getZ(), p.getUniqueId(), type, radius));
         p.playSound(p.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 0.5f, 1.2f);
-        p.sendMessage(CHChunkLoader.PREFIX + "청크로더를 설치했습니다. §7(주변 3x3 청크가 계속 로드됩니다)");
+        p.sendMessage(plugin.lang().msg("placed", "size", CHChunkLoader.sizeText(radius)));
     }
 
     // ------------------------------------------------------------ GUI
@@ -113,7 +114,7 @@ public class LoaderListener implements Listener {
         if (e.getHand() != EquipmentSlot.HAND) return;
         Player p = e.getPlayer();
         GuiHolder h = new GuiHolder(e.getRightClicked().getUniqueId());
-        Inventory inv = Bukkit.createInventory(h, 9, net.kyori.adventure.text.Component.text("청크로더"));
+        Inventory inv = Bukkit.createInventory(h, 9, legacy(plugin.lang().get("gui-title")));
         h.inv = inv;
         ItemStack pane = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta pm = pane.getItemMeta();
@@ -123,8 +124,8 @@ public class LoaderListener implements Listener {
 
         ItemStack btn = new ItemStack(Material.BARRIER);
         ItemMeta bm = btn.getItemMeta();
-        bm.displayName(legacy("§c청크로더 부수기"));
-        bm.lore(List.of(legacy("§7클릭하면 청크로더를 철거하고"), legacy("§7아이템을 인벤토리로 돌려받습니다.")));
+        bm.displayName(legacy(plugin.lang().get("gui-break-name")));
+        bm.lore(plugin.lang().list("gui-break-lore").stream().map(LoaderListener::legacy).toList());
         btn.setItemMeta(bm);
         inv.setItem(4, btn);
         p.openInventory(inv);
@@ -148,7 +149,7 @@ public class LoaderListener implements Listener {
         p.closeInventory();
         Loader l = plugin.loaders().get(h.standId);
         if (l != null && !p.getUniqueId().equals(l.owner) && !p.hasPermission("chunkloader.admin")) {
-            p.sendMessage(CHChunkLoader.PREFIX + "§c설치한 사람만 철거할 수 있습니다.");
+            p.sendMessage(plugin.lang().msg("owner-only"));
             return;
         }
         Entity stand = Bukkit.getEntity(h.standId);
@@ -156,13 +157,13 @@ public class LoaderListener implements Listener {
         if (l == null && stand == null) return; // 이미 철거됨
         plugin.removeLoader(h.standId);
 
-        ItemStack back = plugin.loaderItem() == null ? null : plugin.loaderItem().clone();
+        ItemStack back = plugin.typeItem(l == null ? CHChunkLoader.DEFAULT_TYPE : l.type);
         if (back != null) {
             Map<Integer, ItemStack> left = p.getInventory().addItem(back);
             for (ItemStack rest : left.values()) p.getWorld().dropItem(p.getLocation(), rest);
         }
         p.playSound(p.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 0.5f, 1.2f);
-        p.sendMessage(CHChunkLoader.PREFIX + "청크로더를 철거하고 아이템을 돌려받았습니다.");
+        p.sendMessage(plugin.lang().msg("removed"));
     }
 
     @EventHandler

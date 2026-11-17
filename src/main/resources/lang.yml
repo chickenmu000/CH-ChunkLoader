@@ -1,0 +1,86 @@
+# CH-ChunkLoader 언어 파일 / Language file / 语言文件 / Archivo de idioma
+# config.yml 의 language 에 아래 언어 코드를 적으세요 (ko / en / zh / es).
+# Set "language" in config.yml to one of the codes below (ko / en / zh / es).
+# 색코드는 & 를 사용합니다. {이름} 형태는 자동으로 치환되는 값이니 지우지 마세요.
+# Color codes use &. Keep the {placeholders}. Missing keys fall back to the built-in defaults.
+# 언어를 추가하려면 최상위 키(예: ja:)를 만들고 아래 키들을 모두 번역하세요.
+
+ko:
+  prefix: "&6[청크로더]&f "
+  player-only: "플레이어만 사용할 수 있습니다."
+  no-permission: "&c권한이 없습니다."
+  hold-item: "&c청크로더로 쓸 아이템을 손에 들어주세요."
+  unknown-type: "&c존재하지 않는 청크로더 종류입니다: &e{type} &7(사용 가능: {types})"
+  item-set: "손에 든 아이템을 &e{type} &7({size} 청크)&f 청크로더 아이템으로 설정했습니다. 블록에 우클릭하면 설치됩니다."
+  cannot-place: "&c여기에는 설치할 수 없습니다."
+  placed: "청크로더를 설치했습니다. &7(주변 {size} 청크가 계속 로드됩니다)"
+  gui-title: "청크로더"
+  gui-break-name: "&c청크로더 부수기"
+  gui-break-lore:
+    - "&7클릭하면 청크로더를 철거하고"
+    - "&7아이템을 인벤토리로 돌려받습니다."
+  owner-only: "&c설치한 사람만 철거할 수 있습니다."
+  removed: "청크로더를 철거하고 아이템을 돌려받았습니다."
+  log-enabled: "CH-ChunkLoader 활성화 (청크로더 {count}개, 언어: {lang})"
+  log-save-failed: "loaders.yml 저장 실패: {error}"
+  log-radius-clamped: "청크로더 종류 '{type}' 의 radius {radius} 가 max-radius {max} 를 넘어 {max} 로 적용합니다."
+
+en:
+  prefix: "&6[ChunkLoader]&f "
+  player-only: "Only players can use this."
+  no-permission: "&cYou don't have permission."
+  hold-item: "&cHold the item you want to use as a chunk loader."
+  unknown-type: "&cUnknown chunk loader type: &e{type} &7(available: {types})"
+  item-set: "Set the held item as the &e{type} &7({size} chunks)&f chunk loader item. Right-click a block to place it."
+  cannot-place: "&cYou can't place it here."
+  placed: "Chunk loader placed. &7({size} chunks around it stay loaded)"
+  gui-title: "Chunk Loader"
+  gui-break-name: "&cBreak chunk loader"
+  gui-break-lore:
+    - "&7Click to remove the chunk loader"
+    - "&7and get the item back."
+  owner-only: "&cOnly the person who placed it can remove it."
+  removed: "Chunk loader removed and the item returned."
+  log-enabled: "CH-ChunkLoader enabled ({count} chunk loaders, language: {lang})"
+  log-save-failed: "Failed to save loaders.yml: {error}"
+  log-radius-clamped: "Chunk loader type '{type}': radius {radius} exceeds max-radius {max}, using {max}."
+
+zh:
+  prefix: "&6[区块加载器]&f "
+  player-only: "只有玩家可以使用。"
+  no-permission: "&c你没有权限。"
+  hold-item: "&c请手持要用作区块加载器的物品。"
+  unknown-type: "&c不存在的区块加载器类型：&e{type} &7(可用：{types})"
+  item-set: "已将手中物品设置为 &e{type} &7({size} 区块)&f 区块加载器物品。右键方块即可放置。"
+  cannot-place: "&c无法在此处放置。"
+  placed: "已放置区块加载器。&7(周围 {size} 区块将保持加载)"
+  gui-title: "区块加载器"
+  gui-break-name: "&c拆除区块加载器"
+  gui-break-lore:
+    - "&7点击拆除区块加载器，"
+    - "&7物品将返还到你的背包。"
+  owner-only: "&c只有放置者可以拆除。"
+  removed: "已拆除区块加载器并返还物品。"
+  log-enabled: "CH-ChunkLoader 已启用（区块加载器 {count} 个，语言：{lang}）"
+  log-save-failed: "保存 loaders.yml 失败：{error}"
+  log-radius-clamped: "区块加载器类型 '{type}' 的 radius {radius} 超过 max-radius {max}，已按 {max} 处理。"
+
+es:
+  prefix: "&6[ChunkLoader]&f "
+  player-only: "Solo los jugadores pueden usar esto."
+  no-permission: "&cNo tienes permiso."
+  hold-item: "&cSostén en la mano el objeto que quieres usar como cargador de chunks."
+  unknown-type: "&cTipo de cargador de chunks desconocido: &e{type} &7(disponibles: {types})"
+  item-set: "Has establecido el objeto en tu mano como el cargador de chunks &e{type} &7({size} chunks)&f. Haz clic derecho en un bloque para colocarlo."
+  cannot-place: "&cNo puedes colocarlo aquí."
+  placed: "Cargador de chunks colocado. &7({size} chunks a su alrededor permanecen cargados)"
+  gui-title: "Cargador de chunks"
+  gui-break-name: "&cRomper cargador de chunks"
+  gui-break-lore:
+    - "&7Haz clic para retirar el cargador de chunks"
+    - "&7y recuperar el objeto."
+  owner-only: "&cSolo quien lo colocó puede retirarlo."
+  removed: "Cargador de chunks retirado y objeto devuelto."
+  log-enabled: "CH-ChunkLoader activado ({count} cargadores de chunks, idioma: {lang})"
+  log-save-failed: "Error al guardar loaders.yml: {error}"
+  log-radius-clamped: "Tipo de cargador '{type}': el radius {radius} supera max-radius {max}, se usará {max}."

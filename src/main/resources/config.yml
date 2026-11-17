@@ -1,2 +1,21 @@
-# 청크로더 아이템 - /손에든아이템청크로더설정 으로 자동 저장됩니다. (직접 수정하지 마세요)
-item: null
+# CH-ChunkLoader 설정
+
+# 언어 (lang.yml 의 최상위 키) : ko / en / zh / es   (서버 재시작 후 적용)
+language: ko
+
+# 청크로더 종류별 radius 의 최대값 (너무 큰 값으로 서버가 느려지는 것을 방지)
+max-radius: 8
+
+# 청크로더 종류 목록
+#  - 키 이름(default, wide ...)이 곧 종류 이름입니다. 원하는 만큼 추가할 수 있습니다.
+#  - radius : 설치한 위치의 청크 기준 반경 (청크 단위)
+#             0 = 1x1 / 1 = 3x3 / 2 = 5x5 / 3 = 7x7 ...  => (2*radius+1) x (2*radius+1)
+#  - item   : 이 종류의 아이템 (/손에든아이템청크로더설정 <종류> 로 자동 저장됩니다. 직접 수정하지 마세요)
+#  - 이미 설치된 청크로더는 서버 재시작 시 현재 radius 값으로 다시 적용됩니다.
+loaders:
+  default:
+    radius: 1
+    item: null
+  wide:
+    radius: 2
+    item: null
